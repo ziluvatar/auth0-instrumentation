@@ -1,0 +1,17 @@
+{
+  "name": "auth0-instrumentation",
+  "version": "0.0.1",
+  "description": "Instrumentation for logs, metrics, and exceptions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Auth0",
+  "license": "ISC",
+  "dependencies": {
+    "auth0-common-logging": "ssh://git@gitlab.auth0.com:devops/auth0-common-logging.git#v2.11.0",
+    "aws-kinesis-writable": "^1.4.9",
+    "bunyan": "^1.7.1",
+    "bunyan-sqs": "0.0.3"
+  }
+}
