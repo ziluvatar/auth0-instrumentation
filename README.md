@@ -6,17 +6,32 @@ The goal of this package is to make it easier to collect information about our s
 
 With the right configuration, logs will go from the local server to "THE CLOUD", then a bunch of awesome stuff will happen and they'll become available on the [tenant's dashboard](https://auth0.com/docs/api/v2#!/Logs/get_logs) (if it's related to "business" logs) or on [Kibana](https://kibana.it.auth0.com) (for everything else).
 
-Logger usage:
+Usage:
 
 ```js
-const pkg = require('./package.json');
-const env = require('./lib/env');
-const instrumentation = require('auth0-instrumentation')(pkg, env);
-const logger = instrumentation.logger;
+var pkg = require('./package.json');
+var env = require('./lib/env');
+var agent = require('auth0-instrumentation')(pkg, env);
+var logger = agent.logger;
 
-logger.info('Foo')
+logger.info('Foo');
 // logs something along the lines of:
 // {"name":"foo","process":{"app":"my-app","version":"0.0.1","node":"v5.7.1"},"hostname":"dirceu-auth0.local","pid":24102,"level":30,"msg":"Foo","time":"2016-03-22T19:39:21.609Z","v":0}
+```
+
+## Error catching
+
+Usage:
+
+```js
+var pkg = require('./package.json');
+var env = require('./lib/env');
+var agent = require('auth0-instrumentation')(pkg, env);
+
+// if you use Hapi or Express, that's it! Any non-catched error will be recorded
+// if you want to log an error manually, you can use this:
+var err = new Error('My app did something weird! I need this logged with traceback.');
+agent.errorCatcher.catch(err);
 ```
 
 ## Configuration
@@ -46,5 +61,8 @@ const env = {
   'KINESIS_OBJECT_MODE': true,
   'KINESIS_TIMEOUT': 5,
   'KINESIS_LENGTH': 50,
+
+  // New Relic configuration
+  'USE_NEWRELIC': false,
 };
 ```
