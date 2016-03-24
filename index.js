@@ -3,6 +3,8 @@ function _getErrorCatcher(pkg, env) {
     return { catch: function() {} };
   }
 
+  process.env['NEW_RELIC_TRACER_ENABLED'] = false;
+
   if (env['NEW_RELIC_NO_CONFIG_FILE']) {
     process.env['NEW_RELIC_NO_CONFIG_FILE'] = true;
     process.env['NEW_RELIC_APP_NAME'] = pkg.name;
@@ -14,9 +16,9 @@ function _getErrorCatcher(pkg, env) {
 }
 
 
-module.exports = function(pkg, env) {
+module.exports = function(pkg, env, serializers) {
   return {
-    logger: require('./lib/logger')(pkg, env),
+    logger: require('./lib/logger')(pkg, env, serializers),
     errorCatcher: _getErrorCatcher(pkg, env)
   };
 };
