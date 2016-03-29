@@ -13,6 +13,6 @@
     "aws-kinesis-writable": "^1.4.9",
     "bunyan": "^1.7.1",
     "bunyan-sqs": "0.0.3",
-    "newrelic": "^1.25.5"
+    "raven": "^0.10.0"
   }
 }

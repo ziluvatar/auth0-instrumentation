@@ -1,24 +1,56 @@
-function _getErrorCatcher(pkg, env) {
-  if (!env['USE_NEWRELIC']) {
-    return { catch: function() {} };
+var raven = require('raven');
+
+function _getErrorReporter(pkg, env) {
+  if (!env['ERROR_REPORTER_URL'] || !env['ERROR_REPORTER_FRAMEWORK'] || ['hapi', 'express'].indexOf(env['ERROR_REPORTER_FRAMEWORK']) === -1) {
+    return null;
   }
 
-  process.env['NEW_RELIC_TRACER_ENABLED'] = false;
+  if (env['ERROR_REPORTER_FRAMEWORK'] === 'hapi') {
+    var plugin = {
+      register: function (server, options, next) {
+        var client = new raven.Client(options.dsn);
+        server.expose('client', client);
+        server.on('request-error', function (request, err) {
+          client.captureError(err, {
+            extra: {
+              timestamp: request.info.received,
+              id: request.id,
+              method: request.method,
+              path: request.path,
+              payload: request.pre && request.pre._originalPayload,
+              query: request.query,
+              remoteAddress: request.info.remoteAddress,
+              userAgent: request.raw.req.headers['user-agent']
+            },
+            tags: options.tags
+          });
+        });
 
-  if (env['NEW_RELIC_NO_CONFIG_FILE']) {
-    process.env['NEW_RELIC_NO_CONFIG_FILE'] = true;
-    process.env['NEW_RELIC_APP_NAME'] = pkg.name;
-    if (env['NEW_RELIC_LICENSE_KEY']) {
-      process.env['NEW_RELIC_LICENSE_KEY'] = env['NEW_RELIC_LICENSE_KEY'];
-    }
+        next();
+      },
+      options: {
+        dsn: env['ERROR_REPORTER_URL']
+      }
+    };
+    plugin.register.attributes = { pkg: require('./package.json') };
+    return plugin;
   }
-  return require('./lib/error_catcher');
+
+  if (env['ERROR_REPORTER_FRAMEWORK'] === 'express') {
+    return {
+      requestHandler: raven.middleware.express.requestHandler(env['ERROR_REPORTER_URL']),
+      errorHandler: raven.middleware.express.errorHandler(env['ERROR_REPORTER_URL'])
+    };
+  }
 }
 
 
-module.exports = function(pkg, env, serializers) {
-  return {
-    logger: require('./lib/logger')(pkg, env, serializers),
-    errorCatcher: _getErrorCatcher(pkg, env)
-  };
+module.exports = {
+  logger: null,
+  errorReporter: null,
+
+  init: function(pkg, env, serializers) {
+    this.logger = require('./lib/logger')(pkg, env, serializers);
+    this.errorReporter = _getErrorReporter(pkg, env);
+  }
 };

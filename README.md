@@ -19,21 +19,6 @@ logger.info('Foo');
 // {"name":"foo","process":{"app":"my-app","version":"0.0.1","node":"v5.7.1"},"hostname":"dirceu-auth0.local","pid":24102,"level":30,"msg":"Foo","time":"2016-03-22T19:39:21.609Z","v":0}
 ```
 
-## Error catching
-
-Usage:
-
-```js
-var pkg = require('./package.json');
-var env = require('./lib/env');
-var agent = require('auth0-instrumentation')(pkg, env);
-
-// if you use Hapi or Express, that's it! Any non-catched error will be recorded
-// if you want to log an error manually, you can use this:
-var err = new Error('My app did something weird! I need this logged with traceback.');
-agent.errorCatcher.catch(err);
-```
-
 ## Configuration
 
 Configuration is done through an object with predefined keys, usually coming from environment variables.
@@ -62,7 +47,8 @@ const env = {
   'KINESIS_TIMEOUT': 5,
   'KINESIS_LENGTH': 50,
 
-  // New Relic configuration
-  'USE_NEWRELIC': false,
+  // Error reporter configuration
+  'ERROR_REPORTER_URL': undefined, // Sentry URL
+  'ERROR_REPORTER_FRAMEWORK': undefined // 'hapi' or 'express'
 };
 ```
