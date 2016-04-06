@@ -9,7 +9,7 @@
   "author": "Auth0",
   "license": "ISC",
   "dependencies": {
-    "auth0-common-logging": "git+ssh://git@gitlab.auth0.com:devops/auth0-common-logging.git#v2.11.0",
+    "auth0-common-logging": "github:auth0/auth0-common-logging#v2.11.0",
     "aws-kinesis-writable": "^1.4.10",
     "bunyan": "^1.7.1",
     "bunyan-sqs": "0.0.3",
