@@ -4,7 +4,7 @@ The goal of this package is to make it easier to collect information about our s
 
 ## Logs
 
-With the right configuration, logs will go from the local server to "THE CLOUD", then a bunch of awesome stuff will happen and they'll become available on the [tenant's dashboard](https://auth0.com/docs/api/v2#!/Logs/get_logs) (if it's related to "business" logs) or on [Kibana](https://kibana.it.auth0.com) (for everything else).
+With the right configuration, logs will go from the local server to "THE CLOUD", then a bunch of awesome stuff will happen and they'll become available on the [tenant's dashboard](https://auth0.com/docs/api/v2#!/Logs/get_logs) (if it's related to "business" logs) or on [Kibana](https://www.elastic.co/products/kibana) (for everything else).
 
 Usage:
 
