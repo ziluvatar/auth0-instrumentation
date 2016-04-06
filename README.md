@@ -11,7 +11,8 @@ Usage:
 ```js
 var pkg = require('./package.json');
 var env = require('./lib/env');
-var agent = require('auth0-instrumentation')(pkg, env);
+var agent = require('auth0-instrumentation');
+agent.init(pkg, env);
 var logger = agent.logger;
 
 logger.info('Foo');
@@ -21,7 +22,7 @@ logger.info('Foo');
 
 ## Configuration
 
-Configuration is done through an object with predefined keys, usually coming from environment variables.
+Configuration is done through an object with predefined keys, usually coming from environment variables. You only need to configure the variables you want to change.
 
 These are the variables that can be used, along with their default values:
 
