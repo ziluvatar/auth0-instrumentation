@@ -38,6 +38,100 @@ metrics.increment('requests_served');
 metrics.histogram('service_time', 0.248);
 ```
 
+## Errors
+
+You can use the error reporter to send exceptions to an external service. You can set it up on your app in three ways, depending on what framework is being used.
+
+### Hapi
+
+For `hapi`, the error reporter is a plugin. To use it, you can do something like this:
+
+```js
+var pkg = require('./package.json');
+var env = require('./lib/env');
+var agent = require('auth0-instrumentation');
+agent.init(pkg, env);
+
+var hapi = require('hapi');
+var server = new hapi.Server();
+
+// to capture hapi exceptions with context
+if (agent.errorReporter && env.NODE_ENV !== 'test') {
+  server.register([agent.errorReporter.hapi.plugin], function() {});
+}
+
+// to capture a specific error with some extra information
+if (agent.errorReporter && env.NODE_ENV !== 'test') {
+  agent.errorReporter.captureException('My error', {
+    'user': myUser,
+    'something': somethingElse,
+    'foo': 'bar'
+  });
+}
+```
+
+## Express
+
+For `express`, the error reporter is composed of two middlewares. To use it, you can do something like this:
+
+```js
+var pkg = require('./package.json');
+var env = require('./lib/env');
+var agent = require('auth0-instrumentation');
+agent.init(pkg, env);
+
+var express = require('express');
+var app = express();
+
+// before any other request handlers
+if (agent.errorReporter && env.NODE_ENV !== 'test') {
+  app.use(agent.errorReporter.express.requestHandler);
+}
+
+// before any other error handlers
+if (agent.errorReporter && env.NODE_ENV !== 'test') {
+  app.use(agent.errorReporter.express.errorHandler);
+}
+
+// to capture a specific error with some extra information
+if (agent.errorReporter && env.NODE_ENV !== 'test') {
+  agent.errorReporter.captureException('My error', {
+    'user': myUser,
+    'something': somethingElse,
+    'foo': 'bar'
+  });
+}
+```
+
+## Other
+
+If you don't use `hapi` or `express` - maybe it's not an HTTP API, it's a worker process or a command-line application - you can do something like this:
+
+```js
+var pkg = require('./package.json');
+var env = require('./lib/env');
+var agent = require('auth0-instrumentation');
+agent.init(pkg, env);
+
+// to capture all uncaughts
+if (agent.errorReporter && env.NODE_ENV !== 'test') {
+  agent.errorReporter.patchGlobal(function() {
+    setTimeout(function(){
+      process.exit(1);
+    }, 200);
+  });
+}
+
+// to capture a specific error with some extra information
+if (agent.errorReporter && env.NODE_ENV !== 'test') {
+  agent.errorReporter.captureException('My error', {
+    'user': myUser,
+    'something': somethingElse,
+    'foo': 'bar'
+  });
+}
+```
+
 ## Configuration
 
 Configuration is done through an object with predefined keys, usually coming from environment variables. You only need to configure the variables you want to change.
@@ -68,7 +162,6 @@ const env = {
 
   // Error reporter configuration
   'ERROR_REPORTER_URL': undefined, // Sentry URL
-  'ERROR_REPORTER_FRAMEWORK': undefined, // 'hapi' or 'express'
 
   // Metrics collector configuration
   'METRICS_API_KEY': undefined, // DataDog API key
