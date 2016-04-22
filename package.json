@@ -9,8 +9,8 @@
   "author": "Auth0",
   "license": "ISC",
   "dependencies": {
-    "auth0-common-logging": "auth0/auth0-common-logging#v2.11.1",
-    "aws-kinesis-writable": "^1.4.12",
+    "auth0-common-logging": "auth0/auth0-common-logging#v2.12.0",
+    "aws-kinesis-writable": "^1.4.13",
     "bunyan": "^1.7.1",
     "bunyan-sqs": "0.0.3",
     "datadog-metrics": "^0.3.0",
