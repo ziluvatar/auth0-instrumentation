@@ -56,18 +56,16 @@ var hapi = require('hapi');
 var server = new hapi.Server();
 
 // to capture hapi exceptions with context
-if (agent.errorReporter && env.NODE_ENV !== 'test') {
-  server.register([agent.errorReporter.hapi.plugin], function() {});
-}
+server.register([agent.errorReporter.hapi.plugin], function() {});
 
 // to capture a specific error with some extra information
-if (agent.errorReporter && env.NODE_ENV !== 'test') {
-  agent.errorReporter.captureException('My error', {
-    'user': myUser,
-    'something': somethingElse,
-    'foo': 'bar'
-  });
-}
+agent.errorReporter.captureException('My error', {
+  extra: {
+    user: myUser,
+    something: somethingElse,
+    foo: 'bar'
+  }
+});
 ```
 
 ## Express
@@ -84,23 +82,19 @@ var express = require('express');
 var app = express();
 
 // before any other request handlers
-if (agent.errorReporter && env.NODE_ENV !== 'test') {
-  app.use(agent.errorReporter.express.requestHandler);
-}
+app.use(agent.errorReporter.express.requestHandler);
 
 // before any other error handlers
-if (agent.errorReporter && env.NODE_ENV !== 'test') {
-  app.use(agent.errorReporter.express.errorHandler);
-}
+app.use(agent.errorReporter.express.errorHandler);
 
 // to capture a specific error with some extra information
-if (agent.errorReporter && env.NODE_ENV !== 'test') {
-  agent.errorReporter.captureException('My error', {
-    'user': myUser,
-    'something': somethingElse,
-    'foo': 'bar'
-  });
-}
+agent.errorReporter.captureException('My error', {
+  extra: {
+    user: myUser,
+    something: somethingElse,
+    foo: 'bar'
+  }
+});
 ```
 
 ## Other
@@ -114,22 +108,20 @@ var agent = require('auth0-instrumentation');
 agent.init(pkg, env);
 
 // to capture all uncaughts
-if (agent.errorReporter && env.NODE_ENV !== 'test') {
-  agent.errorReporter.patchGlobal(function() {
-    setTimeout(function(){
-      process.exit(1);
-    }, 200);
-  });
-}
+agent.errorReporter.patchGlobal(function() {
+  setTimeout(function(){
+    process.exit(1);
+  }, 200);
+});
 
 // to capture a specific error with some extra information
-if (agent.errorReporter && env.NODE_ENV !== 'test') {
-  agent.errorReporter.captureException('My error', {
-    'user': myUser,
-    'something': somethingElse,
-    'foo': 'bar'
-  });
-}
+agent.errorReporter.captureException('My error', {
+  extra: {
+    user: myUser,
+    something: somethingElse,
+    foo: 'bar'
+  }
+});
 ```
 
 ## Configuration
