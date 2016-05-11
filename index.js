@@ -1,6 +1,9 @@
+var stubs = require('./lib/stubs');
+
 module.exports = {
-  logger: null,
-  errorReporter: null,
+  logger: stubs.logger,
+  errorReporter: stubs.errorReporter,
+  metrics: stubs.metrics,
 
   init: function(pkg, env, serializers) {
     this.logger = require('./lib/logger')(pkg, env, serializers);
