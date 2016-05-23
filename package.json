@@ -4,7 +4,7 @@
   "description": "Instrumentation for logs, metrics, and exceptions",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "author": "Auth0",
   "license": "ISC",
@@ -16,5 +16,8 @@
     "datadog-metrics": "^0.3.0",
     "pidusage": "^1.0.1",
     "raven": "^0.10.0"
+  },
+  "devDependencies": {
+    "mocha": "^2.4.5"
   }
 }
