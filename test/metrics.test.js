@@ -45,9 +45,18 @@ describe('metrics', function() {
   });
 
   it('should run flush without throwing', function(done) {
-    assert.doesNotThrow(function() {
-      metrics.flush();
-    }, TypeError);
+    assert.doesNotThrow(metrics.flush, TypeError);
+    done();
+  });
+
+  it('should run setDefaultTags without throwing', function(done) {
+    assert.doesNotThrow(metrics.setDefaultTags, TypeError);
+    done();
+  });
+
+  it('should set default tags', function(done) {
+    metrics.setDefaultTags({'color': 'red', 'region': 'west'});
+    assert.deepEqual(metrics.__defaultTags, ['color:red', 'region:west']);
     done();
   });
 
