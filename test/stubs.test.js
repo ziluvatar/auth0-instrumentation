@@ -15,16 +15,12 @@ describe('stubs', function() {
     });
 
     it('should run captureException without throwing', function(done) {
-      assert.doesNotThrow(function() {
-        errorReporter.captureException();
-      }, TypeError);
+      assert.doesNotThrow(errorReporter.captureException, TypeError);
       done();
     });
 
     it('should run patchGlobal without throwing', function(done) {
-      assert.doesNotThrow(function() {
-        errorReporter.patchGlobal();
-      }, TypeError);
+      assert.doesNotThrow(errorReporter.patchGlobal, TypeError);
       done();
     });
 
@@ -53,30 +49,27 @@ describe('stubs', function() {
     });
 
     it('should run gauge without throwing', function(done) {
-      assert.doesNotThrow(function() {
-        metrics.gauge();
-      }, TypeError);
+      assert.doesNotThrow(metrics.gauge, TypeError);
       done();
     });
 
     it('should run increment without throwing', function(done) {
-      assert.doesNotThrow(function() {
-        metrics.increment();
-      }, TypeError);
+      assert.doesNotThrow(metrics.increment, TypeError);
       done();
     });
 
     it('should run histogram without throwing', function(done) {
-      assert.doesNotThrow(function() {
-        metrics.histogram();
-      }, TypeError);
+      assert.doesNotThrow(metrics.histogram, TypeError);
       done();
     });
 
     it('should run flush without throwing', function(done) {
-      assert.doesNotThrow(function() {
-        metrics.flush();
-      }, TypeError);
+      assert.doesNotThrow(metrics.flush, TypeError);
+      done();
+    });
+
+    it('should run setDefaultTags without throwing', function(done) {
+      assert.doesNotThrow(metrics.setDefaultTags, TypeError);
       done();
     });
 
@@ -85,44 +78,32 @@ describe('stubs', function() {
   describe('logger', function() {
 
     it('should run trace without throwing', function(done) {
-      assert.doesNotThrow(function() {
-        logger.trace();
-      }, TypeError);
+      assert.doesNotThrow(logger.trace, TypeError);
       done();
     });
 
     it('should run debug without throwing', function(done) {
-      assert.doesNotThrow(function() {
-        logger.debug();
-      }, TypeError);
+      assert.doesNotThrow(logger.debug, TypeError);
       done();
     });
 
     it('should run info without throwing', function(done) {
-      assert.doesNotThrow(function() {
-        logger.info();
-      }, TypeError);
+      assert.doesNotThrow(logger.info, TypeError);
       done();
     });
 
     it('should run warn without throwing', function(done) {
-      assert.doesNotThrow(function() {
-        logger.warn();
-      }, TypeError);
+      assert.doesNotThrow(logger.warn, TypeError);
       done();
     });
 
     it('should run error without throwing', function(done) {
-      assert.doesNotThrow(function() {
-        logger.error();
-      }, TypeError);
+      assert.doesNotThrow(logger.error, TypeError);
       done();
     });
 
     it('should run fatal without throwing', function(done) {
-      assert.doesNotThrow(function() {
-        logger.fatal();
-      }, TypeError);
+      assert.doesNotThrow(logger.fatal, TypeError);
       done();
     });
 
