@@ -9,10 +9,11 @@ With the right configuration, logs will go from the local server to "THE CLOUD",
 Usage:
 
 ```js
+var serializers = require('./serializers'); // See https://github.com/trentm/node-bunyan#serializers
 var pkg = require('./package.json');
 var env = require('./lib/env');
 var agent = require('auth0-instrumentation');
-agent.init(pkg, env);
+agent.init(pkg, env, serializers);
 var logger = agent.logger;
 
 logger.info('Foo');
