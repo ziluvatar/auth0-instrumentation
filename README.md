@@ -34,9 +34,15 @@ var agent = require('auth0-instrumentation');
 agent.init(pkg, env);
 var metrics = agent.metrics;
 
-metrics.gauge('mygauge', 42);
-metrics.increment('requests_served');
-metrics.histogram('service_time', 0.248);
+var tags = {
+  'user': 'foo',
+  'endpoint': '/login'
+};
+
+metrics.gauge('mygauge', 42, tags);
+metrics.increment('requests.served', tags); // increment by 1
+metrics.increment('some.other.thing', 5, tags); // increment by 5
+metrics.histogram('service.time', 0.248);
 ```
 
 ## Errors
