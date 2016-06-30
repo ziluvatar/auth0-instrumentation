@@ -137,14 +137,10 @@ const env = {
   // general configuration
   'CONSOLE_LOG_LEVEL': 'info', // log level for console
 
-  // AWS configuration for SQS and Kinesis
+  // AWS configuration for Kinesis
   'AWS_ACCESS_KEY_ID': undefined,
   'AWS_ACCESS_KEY_SECRET': undefined,
   'AWS_REGION': undefined
-
-  // SQS configuration
-  'LOG_TO_SQS': '', // SQS queue name
-  'LOG_TO_SQS_LEVEL': 'info', // log level for SQS
 
   // Kinesis configuration
   'LOG_TO_KINESIS': undefined, // Kinesis stream name
