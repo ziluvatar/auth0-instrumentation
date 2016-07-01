@@ -151,9 +151,23 @@ const env = {
   // Kinesis configuration
   'LOG_TO_KINESIS': undefined, // Kinesis stream name
   'LOG_TO_KINESIS_LEVEL': 'info', // log level for Kinesis
+  'LOG_TO_KINESIS_LOG_TYPE': undefined, //Bunyan stream type
   'KINESIS_OBJECT_MODE': true,
   'KINESIS_TIMEOUT': 5,
   'KINESIS_LENGTH': 50,
+
+  //optional if you want a pool of kinesis for failover
+  'KINESIS_POOL': [
+    {
+      //IF any of this config options are undefined will take root level
+      'LOG_TO_KINESIS': undefined, // Kinesis stream name
+      'LOG_TO_KINESIS_LEVEL': 'info', // log level for Kinesis
+      'LOG_TO_KINESIS_LOG_TYPE': undefined, //Bunyan stream type
+      'AWS_ACCESS_KEY_ID': undefined,
+      'AWS_ACCESS_KEY_SECRET': undefined,
+      'AWS_REGION': undefined      
+    }
+  ]
 
   // Error reporter configuration
   'ERROR_REPORTER_URL': undefined, // Sentry URL
