@@ -166,7 +166,9 @@ const env = {
       'LOG_TO_KINESIS_LOG_TYPE': undefined, // bunyan stream type
       'AWS_ACCESS_KEY_ID': undefined,
       'AWS_ACCESS_KEY_SECRET': undefined,
-      'AWS_REGION': undefined      
+      'AWS_REGION': undefined,
+      'IS_PRIMARY': undefined // set as true for the kinesis instance you want to work as primary      
+      
     }
   ]
 
