@@ -13,6 +13,7 @@
     "aws-kinesis-writable": "~2.0.0",
     "blocked": "^1.2.1",
     "bunyan": "^1.8.1",
+    "bunyan-sentry-stream": "^1.0.2",
     "datadog-metrics": "^0.3.0",
     "pidusage": "^1.0.1",
     "raven": "^0.10.0",
