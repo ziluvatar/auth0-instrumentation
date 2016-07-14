@@ -21,6 +21,8 @@
   },
   "devDependencies": {
     "mocha": "^2.4.5",
-    "nsp": "^2.5.0"
+    "nsp": "^2.5.0",
+    "mockuire": "^0.1.0",
+    "sinon": "^1.17.4"
   }
 }
