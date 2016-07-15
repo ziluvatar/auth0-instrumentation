@@ -15,7 +15,8 @@
     "bunyan": "^1.8.1",
     "datadog-metrics": "^0.3.0",
     "pidusage": "^1.0.1",
-    "raven": "^0.10.0"
+    "raven": "^0.10.0",
+    "sinon": "^1.17.4"
   },
   "devDependencies": {
     "mocha": "^2.4.5",
