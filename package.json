@@ -11,6 +11,7 @@
   "dependencies": {
     "auth0-common-logging": "github:auth0/auth0-common-logging#v2.12.1",
     "aws-kinesis-writable": "~2.0.0",
+    "blocked": "^1.2.1",
     "bunyan": "^1.8.1",
     "datadog-metrics": "^0.3.0",
     "pidusage": "^1.0.1",
