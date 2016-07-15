@@ -34,9 +34,15 @@ var agent = require('auth0-instrumentation');
 agent.init(pkg, env);
 var metrics = agent.metrics;
 
-metrics.gauge('mygauge', 42);
-metrics.increment('requests_served');
-metrics.histogram('service_time', 0.248);
+var tags = {
+  'user': 'foo',
+  'endpoint': '/login'
+};
+
+metrics.gauge('mygauge', 42, tags);
+metrics.increment('requests.served', tags); // increment by 1
+metrics.increment('some.other.thing', 5, tags); // increment by 5
+metrics.histogram('service.time', 0.248);
 ```
 
 ## Errors
@@ -137,21 +143,34 @@ const env = {
   // general configuration
   'CONSOLE_LOG_LEVEL': 'info', // log level for console
 
-  // AWS configuration for SQS and Kinesis
+  // AWS configuration for Kinesis
   'AWS_ACCESS_KEY_ID': undefined,
   'AWS_ACCESS_KEY_SECRET': undefined,
   'AWS_REGION': undefined
 
-  // SQS configuration
-  'LOG_TO_SQS': '', // SQS queue name
-  'LOG_TO_SQS_LEVEL': 'info', // log level for SQS
-
-  // Kinesis configuration
+  // Kinesis configuration (single stream)
   'LOG_TO_KINESIS': undefined, // Kinesis stream name
   'LOG_TO_KINESIS_LEVEL': 'info', // log level for Kinesis
+  'LOG_TO_KINESIS_LOG_TYPE': undefined, // bunyan stream type
   'KINESIS_OBJECT_MODE': true,
   'KINESIS_TIMEOUT': 5,
   'KINESIS_LENGTH': 50,
+
+  // Kinesis configuration (pool of streams for failover)
+  'KINESIS_POOL': [
+    {
+      // if any of this config options are undefined will take root level,
+      // if exists
+      'LOG_TO_KINESIS': undefined, // Kinesis stream name
+      'LOG_TO_KINESIS_LEVEL': 'info', // log level for Kinesis
+      'LOG_TO_KINESIS_LOG_TYPE': undefined, // bunyan stream type
+      'AWS_ACCESS_KEY_ID': undefined,
+      'AWS_ACCESS_KEY_SECRET': undefined,
+      'AWS_REGION': undefined,
+      'IS_PRIMARY': undefined // set as true for the kinesis instance you want to work as primary      
+      
+    }
+  ]
 
   // Error reporter configuration
   'ERROR_REPORTER_URL': undefined, // Sentry URL
