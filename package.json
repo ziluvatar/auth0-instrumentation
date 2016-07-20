@@ -13,6 +13,7 @@
     "aws-kinesis-writable": "~2.0.0",
     "blocked": "^1.2.1",
     "bunyan": "^1.8.1",
+    "bunyan-sentry-stream": "^1.0.2",
     "datadog-metrics": "^0.3.0",
     "pidusage": "^1.0.1",
     "raven": "^0.10.0",
@@ -20,6 +21,8 @@
   },
   "devDependencies": {
     "mocha": "^2.4.5",
-    "nsp": "^2.5.0"
+    "nsp": "^2.5.0",
+    "mockuire": "^0.1.0",
+    "sinon": "^1.17.4"
   }
 }
