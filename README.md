@@ -6,6 +6,8 @@ The goal of this package is to make it easier to collect information about our s
 
 With the right configuration, logs will go from the local server to "THE CLOUD", then a bunch of awesome stuff will happen and they'll become available on the [tenant's dashboard](https://auth0.com/docs/api/v2#!/Logs/get_logs) (if it's related to "business" logs) or on [Kibana](https://www.elastic.co/products/kibana) (for everything else).
 
+The logger is powered by [bunyan](https://github.com/trentm/node-bunyan), check their documentation for best practices.
+
 Usage:
 
 ```js
@@ -19,6 +21,9 @@ var logger = agent.logger;
 logger.info('Foo');
 // logs something along the lines of:
 // {"name":"foo","process":{"app":"my-app","version":"0.0.1","node":"v5.7.1"},"hostname":"dirceu-auth0.local","pid":24102,"level":30,"msg":"Foo","time":"2016-03-22T19:39:21.609Z","v":0}
+logger.info({foo: 'bar'}, 'hi');
+// The first field can optionally be a "fields" object, which
+// is merged into the log record.
 ```
 
 ## Metrics
@@ -167,8 +172,8 @@ const env = {
       'AWS_ACCESS_KEY_ID': undefined,
       'AWS_ACCESS_KEY_SECRET': undefined,
       'AWS_REGION': undefined,
-      'IS_PRIMARY': undefined // set as true for the kinesis instance you want to work as primary      
-      
+      'IS_PRIMARY': undefined // set as true for the kinesis instance you want to work as primary
+
     }
   ]
 
