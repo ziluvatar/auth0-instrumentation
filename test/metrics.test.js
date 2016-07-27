@@ -3,7 +3,7 @@ var assert = require('assert');
 var metrics = require('../lib/metrics')({
   name: 'test'
 }, {
-  METRICS_API_KEY: 'abc'
+  STATSD_HOST: 'http://localhost:8125'
 });
 
 var processTags = require('../lib/utils').processTags;
@@ -41,11 +41,6 @@ describe('metrics', function() {
       metrics.gauge('foo.bar', 5.5, ['tag1:a', 'tag2:b']);
       metrics.gauge('foo.bar', 5.5, {'tag1': 'a', 'tag2': 'b'});
     }, TypeError);
-    done();
-  });
-
-  it('should run flush without throwing', function(done) {
-    assert.doesNotThrow(metrics.flush, TypeError);
     done();
   });
 
