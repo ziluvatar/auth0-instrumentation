@@ -16,7 +16,7 @@
     "bunyan-sentry-stream": "^1.0.2",
     "datadog-metrics": "^0.3.0",
     "node-statsd": "^0.1.1",
-    "pidusage": "^1.0.1",
+    "pidusage": "^1.0.4",
     "raven": "^0.10.0",
     "sinon": "^1.17.4"
   },
