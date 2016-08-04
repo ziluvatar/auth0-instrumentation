@@ -7,31 +7,46 @@ const utils = require('../lib/utils');
 const logFormatter = utils.logFormatter;
 const loggerStub = stubs.logger;
 
+const captureLog = logFormatter(loggerStub);
+const levels = ['trace', 'debug', 'info', 'warn', 'error', 'fatal'];
+
 describe('Utils', function() {
   describe('logFormatter', function() {
     var logger = {};
     before(function() {
-      logger.info = logFormatter(loggerStub)('info');
+      levels.forEach(function(lvl) {
+        logger[lvl] = captureLog(lvl);
+      });
     });
 
     afterEach(function() {
-      loggerStub.info.reset();
+      levels.forEach(function(lvl) {
+        loggerStub[lvl].reset();
+      });
     });
     it('should not modify str logs', function() {
-      logger.info('test');
-      assert(loggerStub.info.calledWith('test'));
+      levels.forEach(function(lvl) {
+        logger[lvl]('test');
+        assert(loggerStub[lvl].calledWith('test'));
+      });
     });
     it('should not modify bunyan compatible logs', function() {
-      logger.info(new Error(), 'test');
-      assert(loggerStub.info.calledWith(new Error(), 'test'));
+      levels.forEach(function(lvl) {
+        logger[lvl](new Error(), 'test');
+        assert(loggerStub[lvl].calledWith(new Error(), 'test'));
+      });
     });
     it('should switch object to first index on winston style logs', function() {
-      logger.info('test', new Error());
-      assert(loggerStub.info.calledWith(new Error(), 'test'));
+      levels.forEach(function(lvl) {
+        logger[lvl]('test', new Error());
+        assert(loggerStub[lvl].calledWith(new Error(), 'test'));
+      });
     });
     it('should proxy subsequent strings and args', function() {
-      logger.info('test', new Error(), 'some otherstrings');
-      assert(loggerStub.info.calledWith(new Error(), 'test', 'some otherstrings'));
+      levels.forEach(function(lvl) {
+        logger[lvl]('test', new Error(), 'some otherstrings');
+        assert(loggerStub[lvl].calledWith(new Error(), 'test', 'some otherstrings'));
+      });
     });
   });
 });
