@@ -21,6 +21,9 @@
     "semi": [
       "error",
       "always"
-    ]
+    ],
+    "console": {
+      "allow": ["debug", "info", "warn", "error"]
+    }
   }
 }
