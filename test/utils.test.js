@@ -10,6 +10,12 @@ const loggerStub = stubs.logger;
 const captureLog = logFormatter(loggerStub);
 const levels = ['trace', 'debug', 'info', 'warn', 'error', 'fatal'];
 
+const spy = require('sinon').spy;
+
+levels.forEach(function(lvl) {
+  loggerStub[lvl] = spy();
+});
+
 describe('Utils', function() {
   describe('logFormatter', function() {
     var logger = {};

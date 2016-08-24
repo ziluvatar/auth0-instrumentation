@@ -3,9 +3,12 @@
 const assert = require('assert');
 const sentry = require('../lib/error_reporter')({}, {});
 const logger = require('../lib/logger')({ name: 'test' }, { LOG_LEVEL: 'fatal' });
+const spy = require('sinon').spy;
 
 describe('logger', function() {
   beforeEach(function() {
+    sentry.captureException = spy();
+    sentry.captureMessage = spy();
     sentry.captureException.reset();
     sentry.captureMessage.reset();
   });
