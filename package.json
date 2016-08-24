@@ -17,12 +17,12 @@
     "datadog-metrics": "^0.3.0",
     "node-statsd": "^0.1.1",
     "pidusage": "^1.0.4",
-    "raven": "^0.10.0",
-    "sinon": "^1.17.4"
+    "raven": "^0.10.0"
   },
   "devDependencies": {
     "mocha": "^2.4.5",
     "nsp": "^2.5.0",
-    "mockuire": "^0.1.0"
+    "mockuire": "^0.1.0",
+    "sinon": "^1.17.4"
   }
 }
