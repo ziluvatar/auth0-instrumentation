@@ -179,6 +179,7 @@ const env = {
 
   // Error reporter configuration
   'ERROR_REPORTER_URL': undefined, // Sentry URL
+  'ERROR_REPORTER_LOG_LEVEL': 'error',
 
   // Metrics collector configuration
   'METRICS_API_KEY': undefined, // DataDog API key
