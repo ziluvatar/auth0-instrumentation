@@ -175,7 +175,14 @@ const env = {
       'IS_PRIMARY': undefined // set as true for the kinesis instance you want to work as primary
 
     }
-  ]
+  ],
+
+  // Log to syslog
+  'LOG_TO_SYSLOG': undefined,
+  'LOG_TO_SYSLOG_TYPE': 'udp',
+  'LOG_TO_SYSLOG_HOST': '127.0.0.1',
+  'LOG_TO_SYSLOG_PORT': 8515,
+  'LOG_TO_SYSLOG_LOG_LEVEL': 'error',
 
   // Error reporter configuration
   'ERROR_REPORTER_URL': undefined, // Sentry URL
