@@ -39,12 +39,12 @@ describe('metrics', function() {
     assert.doesNotThrow(function() {
       var id = metrics.time('foo.bar');
       assert.ok(id);
-      metrics.endTime('foo.bar', id);
+      metrics.endTime(id);
       id = metrics.time('foo.bar', ['tag1:a', 'tag2:b']);
       assert.ok(id);
-      metrics.endTime('foo.bar', id, ['tag1:a', 'tag2:b']);
+      metrics.endTime(id, ['tag1:a', 'tag2:b']);
       id = metrics.time('foo.bar', {'tag1': 'a', 'tag2': 'b'});
-      metrics.endTime('foo.bar', id, {'tag1': 'a', 'tag2': 'b'});
+      metrics.endTime(id, {'tag1': 'a', 'tag2': 'b'});
       assert.ok(id);
     }, TypeError);
     done();

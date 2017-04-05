@@ -33,7 +33,7 @@ describe('Utils', function() {
     it('should not modify str logs', function() {
       levels.forEach(function(lvl) {
         logger[lvl]('test');
-        assert(loggerStub[lvl].calledWith('test'));
+        assert(loggerStub[lvl].calledWith({}, 'test'));
       });
     });
     it('should not modify bunyan compatible logs', function() {
