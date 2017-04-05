@@ -35,6 +35,21 @@ describe('metrics', function() {
     done();
   });
 
+  it('should run track without throwing', function(done) {
+    assert.doesNotThrow(function() {
+      var id = metrics.time('foo.bar');
+      assert.ok(id);
+      metrics.endTime('foo.bar', id);
+      id = metrics.time('foo.bar', ['tag1:a', 'tag2:b']);
+      assert.ok(id);
+      metrics.endTime('foo.bar', id, ['tag1:a', 'tag2:b']);
+      id = metrics.time('foo.bar', {'tag1': 'a', 'tag2': 'b'});
+      metrics.endTime('foo.bar', id, {'tag1': 'a', 'tag2': 'b'});
+      assert.ok(id);
+    }, TypeError);
+    done();
+  });
+
   it('should run histogram without throwing', function(done) {
     assert.doesNotThrow(function() {
       metrics.gauge('foo.bar', 5.5);
