@@ -1,4 +1,7 @@
 var stubs = require('./lib/stubs');
+var Logger = require('./lib/logger');
+var ErrorReporter = require('./lib/error_reporter');
+var Metrics = require('./lib/metrics');
 
 module.exports = {
   logger: stubs.logger,
@@ -6,8 +9,8 @@ module.exports = {
   metrics: stubs.metrics,
 
   init: function(pkg, env, serializers) {
-    this.logger = require('./lib/logger')(pkg, env, serializers);
-    this.errorReporter = require('./lib/error_reporter')(pkg, env);
-    this.metrics = require('./lib/metrics')(pkg, env);
+    this.logger = Logger(pkg, env, serializers);
+    this.errorReporter = ErrorReporter(pkg, env);
+    this.metrics = Metrics(pkg, env);
   }
 };
