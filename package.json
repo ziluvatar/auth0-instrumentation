@@ -6,6 +6,7 @@
   "scripts": {
     "test": "mocha"
   },
+  "private": true,
   "author": "Auth0",
   "license": "ISC",
   "dependencies": {
