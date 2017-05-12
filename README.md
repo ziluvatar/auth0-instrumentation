@@ -1,17 +1,17 @@
 # auth0-instrumentation
 
-The goal of this package is to make it easier to collect information about our services through logs, metrics and error catching.
+The goal of this package is to make it easier to collect information about our services through logs, metrics, and error catching.
 
 ## Logs
 
-With the right configuration, logs will go from the local server to "THE CLOUD", then a bunch of awesome stuff will happen and they'll become available on [Kibana](https://www.elastic.co/products/kibana).
+By default, logs will be sent to the standard output; log collectors (like [fluentd](https://www.fluentd.org)) might be used to send them to other places like [Kibana](https://www.elastic.co/products/kibana).
 
-The logger is powered by [bunyan](https://github.com/trentm/node-bunyan), check their documentation for best practices.
+The logger is powered by [pino](https://github.com/pinojs/pino), check their documentation for best practices.
 
 Usage:
 
 ```js
-var serializers = require('./serializers'); // See https://github.com/trentm/node-bunyan#serializers
+var serializers = require('./serializers'); // works just like https://github.com/trentm/node-bunyan#serializers
 var pkg = require('./package.json');
 var env = require('./lib/env');
 var agent = require('auth0-instrumentation');
@@ -148,41 +148,13 @@ const env = {
   // general configuration
   'CONSOLE_LOG_LEVEL': 'info', // log level for console
 
-  // AWS configuration for Kinesis
-  'AWS_ACCESS_KEY_ID': undefined,
-  'AWS_ACCESS_KEY_SECRET': undefined,
-  'AWS_REGION': undefined
-
-  // Kinesis configuration (single stream)
-  'LOG_TO_KINESIS': undefined, // Kinesis stream name
-  'LOG_TO_KINESIS_LEVEL': 'info', // log level for Kinesis
-  'LOG_TO_KINESIS_LOG_TYPE': undefined, // bunyan stream type
-  'KINESIS_OBJECT_MODE': true,
-  'KINESIS_TIMEOUT': 5,
-  'KINESIS_LENGTH': 50,
-
-  // Kinesis configuration (pool of streams for failover)
-  'KINESIS_POOL': [
-    {
-      // if any of this config options are undefined will take root level,
-      // if exists
-      'LOG_TO_KINESIS': undefined, // Kinesis stream name
-      'LOG_TO_KINESIS_LEVEL': 'info', // log level for Kinesis
-      'LOG_TO_KINESIS_LOG_TYPE': undefined, // bunyan stream type
-      'AWS_ACCESS_KEY_ID': undefined,
-      'AWS_ACCESS_KEY_SECRET': undefined,
-      'AWS_REGION': undefined,
-      'IS_PRIMARY': undefined // set as true for the kinesis instance you want to work as primary
-
-    }
-  ]
-
   // Error reporter configuration
   'ERROR_REPORTER_URL': undefined, // Sentry URL
   'ERROR_REPORTER_LOG_LEVEL': 'error',
 
   // Metrics collector configuration
   'METRICS_API_KEY': undefined, // DataDog API key
+  'STATSD_HOST': undefined, // to use statsd or dogstatsd instead of the DataDog API
   'METRICS_HOST': require('os').hostname(),
   'METRICS_PREFIX': pkg.name + '.',
   'METRICS_FLUSH_INTERVAL': 15 // seconds

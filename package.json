@@ -11,13 +11,11 @@
   "license": "ISC",
   "dependencies": {
     "auth0-common-logging": "github:auth0/auth0-common-logging#v2.12.1",
-    "aws-kinesis-writable": "~2.0.0",
     "blocked": "^1.2.1",
-    "bunyan": "^1.8.1",
-    "bunyan-sentry-stream": "^1.0.2",
     "datadog-metrics": "^0.3.0",
     "node-statsd": "^0.1.1",
     "pidusage": "^1.0.4",
+    "pino": "^4.5.2",
     "raven": "^0.10.0",
     "uuid": "^3.0.1"
   },
