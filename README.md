@@ -1,5 +1,7 @@
 # auth0-instrumentation
 
+[![Build Status](https://travis-ci.org/auth0/auth0-instrumentation.svg?branch=master)](https://travis-ci.org/auth0/auth0-instrumentation)
+
 The goal of this package is to make it easier to collect information about our services through logs, metrics and error catching.
 
 ## Logs
