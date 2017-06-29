@@ -73,6 +73,25 @@ describe('stubs', function() {
       done();
     });
 
+    it('should run time without throwing', function(done) {
+      assert.doesNotThrow(metrics.time, TypeError);
+      done();
+    });
+
+    it('should run time and it should return a value', function(done) {
+      assert.ok(metrics.time());
+      done();
+    });
+
+    it('should run endTime without throwing', function(done) {
+      assert.doesNotThrow(metrics.endTime, TypeError);
+      done();
+    });
+
+    it('should run startResourceCollection without throwing', function(done) {
+      assert.doesNotThrow(metrics.startResourceCollection, TypeError);
+      done();
+    });
   });
 
   describe('logger', function() {
