@@ -19,6 +19,7 @@
     "gc-stats": "^1.0.2",
     "lodash.debounce": "^4.0.8",
     "moment": "^2.18.1",
+    "ms": "^2.0.0",
     "node-statsd": "^0.1.1",
     "pidusage": "^1.0.4",
     "raven": "^0.10.0",
