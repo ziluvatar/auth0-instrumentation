@@ -22,8 +22,9 @@
       "error",
       "always"
     ],
-    "console": {
-      "allow": ["debug", "info", "warn", "error"]
-    }
+    "no-console": [
+     "error",
+     { "allow": ["debug", "info", "warn", "error"] }
+    ]
   }
 }
