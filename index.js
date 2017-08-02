@@ -8,6 +8,7 @@ module.exports = {
   logger: stubs.logger,
   errorReporter: stubs.errorReporter,
   metrics: stubs.metrics,
+  profiler: stubs.profiler,
 
   init: function(pkg, env, serializers) {
     this.logger = Logger(pkg, env, serializers);
