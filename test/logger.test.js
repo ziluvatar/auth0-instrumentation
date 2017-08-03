@@ -1,29 +1,33 @@
 'use strict';
 
+const Writable = require('stream').Writable;
 const assert = require('assert');
-const sentry = require('../lib/error_reporter')({}, {});
-const logger = require('../lib/logger')({ name: 'test' }, { LOG_LEVEL: 'fatal' });
-const spy = require('sinon').spy;
+const Logger = require('../lib/logger');
 
 describe('logger', function() {
+  var entries;
+  var logger;
+
   beforeEach(function() {
-    sentry.captureException = spy();
-    sentry.captureMessage = spy();
-    sentry.captureException.reset();
-    sentry.captureMessage.reset();
+    entries = [];
+    logger =  Logger({ name: 'test' }, { LOG_LEVEL: 'fatal' }, null, {
+      stream: Writable({
+        objectMode: true,
+        write: (entry, enc, callback) => {
+          entries.push(entry);
+          callback();
+        }
+      })
+    });
   });
 
   describe('SentryStream', function() {
     it('should call captureException on error when level is error', function() {
-      logger.error(new Error('test'));
-      assert(sentry.captureException.calledOnce);
-      assert(sentry.captureMessage.calledOnce === false);
-    });
-
-    it('should call captureMessage on string when level is error', function() {
-      logger.error('test');
-      assert(sentry.captureException.calledOnce === false);
-      assert(sentry.captureMessage.calledOnce);
+      const err = new Error('test');
+      logger.error({ err });
+      assert.equal(entries.length, 1);
+      assert.equal(entries[0].err.message, err.message);
+      assert.equal(entries[0].err.stack, err.stack);
     });
   });
 });

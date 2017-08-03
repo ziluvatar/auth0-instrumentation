@@ -11,8 +11,8 @@ module.exports = {
   profiler: stubs.profiler,
 
   init: function(pkg, env, serializers) {
-    this.logger = Logger(pkg, env, serializers);
     this.errorReporter = ErrorReporter(pkg, env);
+    this.logger = Logger(pkg, env, serializers, this.errorReporter);
     this.metrics = Metrics(pkg, env);
     this.profiler = new Profiler(this, pkg, env);
   }
