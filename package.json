@@ -11,7 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "auth0-common-logging": "github:auth0/auth0-common-logging#v2.16.1",
-    "aws-kinesis-writable": "~2.0.0",
+    "aws-kinesis-writable": "~4.0.0",
     "blocked": "^1.2.1",
     "bunyan": "^1.8.1",
     "bunyan-sentry-stream": "^1.0.2",
