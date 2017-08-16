@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.7.0
+
+FEATURES:
+* Underlying kinesis lib performs retries on failed calls.
+
 ## v2.6.0
 
 FEATURES:

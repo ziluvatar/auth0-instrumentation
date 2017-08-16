@@ -23,6 +23,7 @@ describe('Profiler', function() {
   });
   describe('#createDebouncedSnapshot', function() {
     it('should create a snapshot and log', function(done) {
+      this.timeout(3000);
       profiler.createDebouncedSnapshot('testing');
       setInterval(() => {
         assert(agent.logger.info.calledOnce);
